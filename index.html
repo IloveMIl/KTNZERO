@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katana ZERO 資訊</title>
+    <!-- 引入外部 CSS 文件 -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- 引入 Font Awesome 圖示庫 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- 當前播放音樂顯示 -->
+    <div class="now-playing" id="now-playing">
+        正在播放：<span id="now-playing-name"></span>
+        <div class="controls">
+            <button id="now-playing-play-pause"><i class="fas fa-play"></i></button>
+            <input type="range" id="now-playing-progress" value="0" min="0" max="100">
+        </div>
+    </div>
+
+    <!-- 導覽列 -->
+    <div class="NavigationBar-actionMenu-container clearfix" bis_skin_checked="1">
+        <div class="NavigationBar-icon clearfix" style="padding: 10px;" bis_skin_checked="1">
+            <a class="header__logo header__logo--middle-center" href="/">
+                <img src="image/logo.png" alt="Katana ZERO Logo" width="1200" height="1200" loading="lazy">
+            </a>
+        </div>
+    </div>
+
+    <!-- 橫向選單 -->
+    <div class="horizontal-menu">
+        <a data-target="home">首頁</a>
+        <a data-target="game-type">遊戲類型</a>
+        <a data-target="story-background">故事背景</a>
+        <a data-target="gameplay">遊戲玩法</a>
+        <a data-target="music">音樂</a>
+    </div>
+
+    <!-- 內容區域 -->
+    <div id="home" class="content active">
+        <h2>歡迎來到 Katana ZERO 的世界</h2>
+        <p>探索這款獨特的平台砍殺遊戲，體驗反烏托邦的故事與刺激的戰鬥！</p>
+    </div>
+
+    <div id="game-type" class="content">
+        <h2>遊戲類型</h2>
+        <ul>
+            <li><strong>類型</strong>：平台遊戲，砍殺遊戲</li>
+            <li><strong>模式</strong>：單人遊戲</li>
+        </ul>
+    </div>
+
+    <div id="story-background" class="content">
+        <h2>故事背景</h2>
+        <ul>
+            <li><strong>設定</strong>：反烏托邦都市</li>
+            <li><strong>主角</strong>：Subject Zero，一位失憶的武士刺客，擁有減慢時間和預測未來的能力</li>
+        </ul>
+    </div>
+
+    <div id="gameplay" class="content">
+        <h2>遊戲玩法</h2>
+        <ul>
+            <li><strong>核心機制</strong>：
+                <ul>
+                    <li class="gameplay-option" data-image="Katana_attack.gif">
+                        使用武士刀進行攻擊
+                    </li>
+                    <li class="gameplay-option" data-image="Slomotion.gif">
+                        減慢時間以預測敵人動作
+                    </li>
+                    <li class="gameplay-option" data-image="Exploiting_environmental_traps1.gif,Exploiting_environmental_traps2.gif">
+                        利用環境陷阱
+                    </li>
+                    <li class="gameplay-option" data-image="One_hit_kills.gif">
+                        單擊即死的戰鬥系統
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- 圖片顯示區域 -->
+        <div id="gameplay-images" class="gameplay-images"></div>
+    </div>
+
+    <div id="music" class="content">
+        <h2>音樂</h2>
+        <ul>
+            <li>
+                <strong>作曲家</strong>：Thijs Lodewijk, Bill Kiley<br>
+                <strong>風格</strong>：合成波音樂
+            </li>
+        </ul>
+        <!-- 音樂播放器 -->
+        <div id="music-list"></div>
+    </div>
+
+    <!-- 引入外部 JavaScript 文件 -->
+    <script src="script.js"></script>
+</body>
+</html>
