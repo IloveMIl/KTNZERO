@@ -1,0 +1,266 @@
+/* 全域樣式 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* 深灰色背景 */
+    color: #e0e0e0; /* 淺灰色文字 */
+}
+
+/* 導覽列容器 */
+.NavigationBar-actionMenu-container {
+    background-color: #111; /* 更深的背景色 */
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* 導覽列圖標 */
+.NavigationBar-icon {
+    display: inline-block;
+}
+
+/* Logo 連結 */
+.header__logo {
+    display: block;
+    text-decoration: none;
+}
+
+/* Logo 圖片 */
+.header__logo img {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+/* 滑鼠懸停效果 */
+.header__logo img:hover {
+    transform: scale(1.1);
+}
+
+/* 橫向選單 */
+.horizontal-menu {
+    display: flex;
+    justify-content: center;
+    background-color: #222; /* 深灰色選單背景 */
+    padding: 10px 0;
+}
+
+.horizontal-menu a {
+    color: #e0e0e0; /* 淺灰色文字 */
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.horizontal-menu a:hover {
+    background-color: #333; /* 滑鼠懸停時的背景色 */
+    color: #ffcc00; /* 滑鼠懸停時的文字顏色 */
+}
+
+/* 內容區域 */
+.content {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #2d2d2d; /* 深灰色內容背景 */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    display: none; /* 預設隱藏 */
+    animation: fadeIn 0.5s ease-out;
+}
+
+.content.active {
+    display: block; /* 顯示內容 */
+}
+
+.content h2 {
+    color: #ffcc00; /* 標題顏色 */
+    border-bottom: 2px solid #ffcc00;
+    padding-bottom: 5px;
+}
+
+.content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.content ul li {
+    background-color: #3d3d3d; /* 列表項目背景色 */
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 4px solid #ffcc00;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content ul li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 首頁內容區域 */
+#home {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('image/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#home h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#home p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 遊戲玩法選項樣式 */
+.gameplay-option {
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gameplay-option:hover {
+    background-color: #444;
+    color: #ffcc00;
+}
+
+/* 圖片顯示區域 */
+.gameplay-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #3d3d3d;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-20px);
+}
+
+/* 水平排列兩張圖片 */
+.gameplay-images.horizontal {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.gameplay-images.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 圖片樣式 */
+.gameplay-images img {
+    max-width: 48%; /* 讓兩張圖片各佔一半寬度 */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 音樂播放器樣式 */
+.music-player {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #3d3d3d;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.music-player .music-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.music-player .music-info span {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #e0e0e0;
+}
+
+.music-player button {
+    background-color: transparent;
+    border: none;
+    color: #ffcc00;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.music-player button:hover {
+    color: #e6b800;
+}
+
+.music-player input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+/* 時間顯示 */
+.time-display {
+    text-align: center;
+    font-size: 14px;
+    color: #e0e0e0;
+    margin-top: 5px;
+}
+
+/* 當前播放音樂顯示 */
+.now-playing {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    color: #ffcc00;
+    width: 300px;
+}
+
+.now-playing .controls {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.now-playing .controls button {
+    background-color: transparent;
+    border: none;
+    color: #ffcc00;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.now-playing .controls button:hover {
+    color: #e6b800;
+}
+
+.now-playing .controls input[type="range"] {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+/* 切換動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
