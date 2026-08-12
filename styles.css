@@ -1,0 +1,597 @@
+/* 全域樣式 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Press Start 2P', Arial, sans-serif;
+    background: linear-gradient(180deg, #1a1a1a, #2d2d2d);
+    color: #e0e0e0;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 動態掃描線背景 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 2px,
+        rgba(255, 45, 85, 0.05) 2px,
+        rgba(255, 45, 85, 0.05) 4px
+    );
+    animation: scanline 10s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+/* 導覽列容器 */
+.NavigationBar-actionMenu-container {
+    background: #111;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 45, 85, 0.5);
+}
+
+/* 導覽列圖標 */
+.NavigationBar-icon {
+    display: inline-block;
+}
+
+/* Logo 連結 */
+.header__logo {
+    display: block;
+    text-decoration: none;
+}
+
+/* Logo 圖片 */
+.header__logo img {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #ff2d55);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.header__logo img:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px #ff2d55);
+}
+
+/* 橫向選單 */
+.horizontal-menu {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg, #1a1a1a, #2d2d2d);
+    padding: 15px 0;
+    box-shadow: 0 0 15px rgba(161, 0, 242, 0.5);
+}
+
+.horizontal-menu a {
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 12px 25px;
+    margin: 0 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.horizontal-menu a:hover {
+    color: #ff2d55;
+    text-shadow: 0 0 10px #ff2d55, 0 0 20px #ff2d55;
+    background: rgba(255, 45, 85, 0.2);
+    border-radius: 4px;
+}
+
+.horizontal-menu a.active {
+    color: #00ddeb;
+    text-shadow: 0 0 10px #00ddeb;
+}
+
+/* 內容區域 */
+.content {
+    padding: 30px;
+    max-width: 900px;
+    margin: 30px auto;
+    background: rgba(45, 45, 45, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(161, 0, 242, 0.5);
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.content.active {
+    display: block;
+}
+
+.content h2 {
+    color: #ff2d55;
+    border-bottom: 3px solid #00ddeb;
+    padding-bottom: 8px;
+    font-size: 24px;
+    text-shadow: 0 0 10px #ff2d55;
+}
+
+.content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.content ul li {
+    background: rgba(61, 61, 61, 0.8);
+    margin: 15px 0;
+    padding: 15px;
+    border-left: 5px solid #ff2d55;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content ul li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 0 15px rgba(255, 45, 85, 0.5);
+}
+
+/* 首頁內容區域 */
+#home {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('image/Background.jpg') center/cover, #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 120px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 221, 235, 0.5);
+}
+
+#home h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px #ff2d55;
+}
+
+#home p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 0 0 10px #00ddeb;
+}
+
+/* 遊戲玩法選項樣式 */
+/*.gameplay-option {
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gameplay-option:hover {
+    background: rgba(255, 45, 85, 0.2);
+    color: #00ddeb;
+    text-shadow: 0 0 10px #00ddeb;
+}*/
+
+/* ========================================
+   遊戲玩法
+   ======================================== */
+
+.gameplay-option {
+    position: relative;
+
+    /*
+       讓圖片出現時可以正常把下面內容推下去
+    */
+    display: block;
+
+    cursor: pointer;
+
+    transition:
+        margin-bottom 0.25s ease;
+}
+
+
+/* ========================================
+   圖片 Popup
+   ======================================== */
+
+.gameplay-popup {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    width: min(760px, calc(100vw - 80px));
+
+    margin-top: 12px;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    background: rgba(17, 17, 17, 0.97);
+
+    border: 2px solid #ff2d55;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 15px rgba(255, 45, 85, 0.5),
+        0 0 30px rgba(255, 45, 85, 0.25);
+
+
+    /*
+       初始狀態：
+       完全不佔高度
+    */
+
+    max-height: 0;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    overflow: hidden;
+
+    transform: translateY(-8px);
+
+
+    transition:
+        max-height 0.35s ease,
+        opacity 0.25s ease,
+        padding 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   滑鼠移入
+   ======================================== */
+
+.gameplay-popup.active {
+
+    max-height: 450px;
+
+    padding: 15px;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* ========================================
+   多張圖片
+   ======================================== */
+
+.gameplay-popup.horizontal {
+
+    flex-direction: row;
+
+    justify-content: center;
+}
+
+
+/* ========================================
+   圖片
+   ======================================== */
+
+.gameplay-popup img {
+
+    display: block;
+
+    width: auto;
+
+    max-width: 100%;
+
+    max-height: 350px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    border: 2px solid #ff2d55;
+
+    filter:
+        drop-shadow(0 0 8px #ff2d55);
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+/* ========================================
+   兩張圖片並排
+   ======================================== */
+
+.gameplay-popup.horizontal img {
+
+    width: calc(50% - 8px);
+
+    max-width: calc(50% - 8px);
+
+}
+
+
+/* ========================================
+   圖片 Hover
+   ======================================== */
+
+.gameplay-popup img:hover {
+
+    transform: scale(1.03);
+
+    filter:
+        drop-shadow(0 0 15px #ff2d55);
+
+}
+
+
+/* ========================================
+   手機版
+   ======================================== */
+
+@media (max-width: 768px) {
+
+    .gameplay-popup {
+
+        width: calc(100vw - 60px);
+
+        max-width: 600px;
+
+    }
+
+
+    .gameplay-popup.horizontal {
+
+        flex-direction: column;
+
+    }
+
+
+    .gameplay-popup.horizontal img {
+
+        width: 100%;
+
+        max-width: 100%;
+
+    }
+
+}
+
+.gameplay-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.gameplay-popup.horizontal {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.gameplay-popup img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 360px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid #ff2d55;
+    filter: drop-shadow(0 0 10px #ff2d55);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.gameplay-popup.horizontal img {
+    width: calc(50% - 8px);
+    max-width: calc(50% - 8px);
+}
+
+.gameplay-popup img:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 15px #ff2d55);
+}
+
+/* 音樂播放器樣式 */
+.music-player {
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0;
+    padding: 20px;
+    background: rgba(45, 45, 45, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 221, 235, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+.music-player:hover {
+    box-shadow: 0 0 25px rgba(0, 221, 235, 0.7);
+}
+
+.music-player .music-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.music-player .music-info span {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #e0e0e0;
+    text-shadow: 0 0 5px #a100f2;
+}
+
+.music-player button {
+    background: transparent;
+    border: none;
+    color: #ff2d55;
+    font-size: 22px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.music-player button:hover {
+    color: #00ddeb;
+    text-shadow: 0 0 10px #00ddeb;
+}
+
+.music-player input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    margin: 15px 0;
+    background: linear-gradient(to right, #ff2d55 0%, #ff2d55 var(--value), #3d3d3d var(--value), #3d3d3d 100%);
+    --value: 0%;
+    transition: --value 0.3s ease;
+}
+
+.music-player input[type="range"]::-webkit-slider-thumb {
+    background: #00ddeb;
+    box-shadow: 0 0 10px #00ddeb;
+}
+
+.music-player input[type="range"]::-moz-range-thumb {
+    background: #00ddeb;
+    box-shadow: 0 0 10px #00ddeb;
+}
+
+/* 時間顯示 */
+.time-display {
+    text-align: center;
+    font-size: 12px;
+    color: #e0e0e0;
+    text-shadow: 0 0 5px #a100f2;
+    margin-top: 10px;
+}
+
+/* 當前播放音樂顯示 */
+.now-playing {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(17, 17, 17, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 45, 85, 0.7);
+    font-size: 14px;
+    color: #ff2d55;
+    width: 320px;
+    z-index: 1000;
+}
+
+.now-playing .controls {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.now-playing .controls button {
+    flex: 0 0 auto;
+    background: transparent;
+    border: none;
+    color: #ff2d55;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 4px;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.now-playing .controls button:hover {
+    color: #00ddeb;
+    text-shadow: 0 0 10px #00ddeb;
+    transform: scale(1.1);
+}
+
+.now-playing .controls input[type="range"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    cursor: pointer;
+    background: linear-gradient(to right, #ff2d55 0%, #ff2d55 var(--value), #3d3d3d var(--value), #3d3d3d 100%);
+    --value: 0%;
+    transition: --value 0.3s ease;
+}
+
+.now-playing .controls input[type="range"]::-webkit-slider-thumb {
+    background: #00ddeb;
+    box-shadow: 0 0 10px #00ddeb;
+}
+
+.now-playing .controls input[type="range"]::-moz-range-thumb {
+    background: #00ddeb;
+    box-shadow: 0 0 10px #00ddeb;
+}
+
+/* 切換動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .horizontal-menu {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .horizontal-menu a {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    .content {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    #home {
+        padding: 80px 20px;
+    }
+
+    .now-playing {
+        width: 90%;
+        right: 5%;
+        top: 10px;
+    }
+
+
+    .gameplay-popup {
+        width: 100%;
+    }
+
+    .gameplay-popup.horizontal {
+        flex-direction: column;
+    }
+
+    .gameplay-popup.horizontal img {
+        width: 100%;
+        max-width: 100%;
+    }
+}
