@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -6,24 +45,26 @@
     <title>Katana ZERO 資訊</title>
     <!-- 引入外部 CSS 文件 -->
     <link rel="stylesheet" href="styles.css">
-    <!-- 引入 Font Awesome 圖示庫 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入 Font Awesome 圖示庫 (更新到 6.6.0) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous">
 </head>
 <body>
     <!-- 當前播放音樂顯示 -->
     <div class="now-playing" id="now-playing">
         正在播放：<span id="now-playing-name"></span>
         <div class="controls">
-            <button id="now-playing-play-pause"><i class="fas fa-play"></i></button>
-            <input type="range" id="now-playing-progress" value="0" min="0" max="100">
+            <button id="now-playing-prev" title="上一首" aria-label="上一首"><i class="fas fa-backward-step"></i></button>
+            <button id="now-playing-play-pause" title="播放/暫停" aria-label="播放/暫停"><i class="fas fa-play"></i></button>
+            <button id="now-playing-next" title="下一首" aria-label="下一首"><i class="fas fa-forward-step"></i></button>
+            <input type="range" id="now-playing-progress" value="0" min="0" max="100" aria-label="音樂進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
         </div>
     </div>
 
     <!-- 導覽列 -->
-    <div class="NavigationBar-actionMenu-container clearfix" bis_skin_checked="1">
-        <div class="NavigationBar-icon clearfix" style="padding: 10px;" bis_skin_checked="1">
-            <a class="header__logo header__logo--middle-center" href="/">
-                <img src="image/logo.png" alt="Katana ZERO Logo" width="1200" height="1200" loading="lazy">
+    <div class="NavigationBar-actionMenu-container clearfix">
+        <div class="NavigationBar-icon clearfix" style="padding: 10px;">
+            <a class="header__logo header__logo--middle-center" href="#" data-target="home">
+                <img src="image/logo.png" alt="Katana ZERO Logo" loading="lazy">
             </a>
         </div>
     </div>
@@ -61,26 +102,36 @@
 
     <div id="gameplay" class="content">
         <h2>遊戲玩法</h2>
+
         <ul>
-            <li><strong>核心機制</strong>：
+            <li>
+                <strong>核心機制</strong>：
+
                 <ul>
-                    <li class="gameplay-option" data-image="Katana_attack.gif">
+
+                    <li class="gameplay-option"
+                        data-image="Katana_attack.gif">
                         使用武士刀進行攻擊
                     </li>
-                    <li class="gameplay-option" data-image="Slomotion.gif">
+
+                    <li class="gameplay-option"
+                        data-image="Slomotion.gif">
                         減慢時間以預測敵人動作
                     </li>
-                    <li class="gameplay-option" data-image="Exploiting_environmental_traps1.gif,Exploiting_environmental_traps2.gif">
+
+                    <li class="gameplay-option"
+                        data-image="Exploiting_environmental_traps1.gif,Exploiting_environmental_traps2.gif">
                         利用環境陷阱
                     </li>
-                    <li class="gameplay-option" data-image="One_hit_kills.gif">
+
+                    <li class="gameplay-option"
+                        data-image="One_hit_kills.gif">
                         單擊即死的戰鬥系統
                     </li>
+
                 </ul>
             </li>
         </ul>
-        <!-- 圖片顯示區域 -->
-        <div id="gameplay-images" class="gameplay-images"></div>
     </div>
 
     <div id="music" class="content">
